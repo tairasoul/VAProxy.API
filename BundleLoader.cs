@@ -51,7 +51,6 @@ namespace VAP_API
             {
                 LoadFromDir(bundles);
             }
-            LoadFromDir(bundles);
             LoadComplete.Invoke();
         }
 
