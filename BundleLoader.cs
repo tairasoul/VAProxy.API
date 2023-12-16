@@ -18,7 +18,7 @@ namespace VAP_API
         internal static void Load()
         {
             Plugin.Log.LogMessage("[BundleLoader] Loading bundles."); 
-            string[] invalidEndings = { ".dll", ".json", ".png", ".md", ".old", ".txt", ".exe", ".lem" };
+            string[] invalidEndings = { ".dll", ".json", ".png", ".md", ".old", ".txt", ".exe", ".lem", ".old" };
             string bundleDir = Path.Combine(Paths.BepInExRootPath, "plugins");
             string[] bundles = Directory.GetFiles(bundleDir, "*", SearchOption.AllDirectories).Where(file => !invalidEndings.Any(ending => file.EndsWith(ending, StringComparison.CurrentCultureIgnoreCase))).ToArray();
 
