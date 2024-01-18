@@ -3,7 +3,7 @@ using BepInEx.Logging;
 
 namespace VAP_API
 {
-    [BepInPlugin("va.proxy.api", "VAPI", "1.1.0")]
+    [BepInPlugin("va.proxy.api", "VAPI", "1.2.0")]
     public sealed class Plugin: BaseUnityPlugin
     {
         // its currently just a bundle loader/file loader lmao

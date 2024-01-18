@@ -15,6 +15,13 @@ namespace VAP_API
         public static Dictionary<string, UnityEngine.Object> assets = new Dictionary<string, UnityEngine.Object>();
 
         public static event Action LoadComplete = completed;
+
+        public static void LoadFromStream(Stream stream)
+        {
+            AssetBundle bundle = AssetBundle.LoadFromStream(stream);
+            SaveAsset(bundle);
+        }
+
         internal static void Load()
         {
             Plugin.Log.LogMessage("[BundleLoader] Loading bundles."); 
@@ -100,12 +107,42 @@ namespace VAP_API
             }
         }
 
+        private static void SaveAsset(AssetBundle bundle)
+        {
+            try
+            {
+                string[] assetPaths = bundle.GetAllAssetNames();
+                foreach (string assetPath in assetPaths)
+                {
+                    Plugin.Log.LogInfo("[BundleLoader] Got asset " + assetPath);
+                    UnityEngine.Object loadedAsset = bundle.LoadAsset(assetPath);
+                    if (loadedAsset == null)
+                    {
+                        Plugin.Log.LogWarning($"[BundleLoader] Failed to load asset {assetPath} from bundle {bundle.name}");
+                        continue;
+                    }
+
+                    if (assets.ContainsKey(assetPath))
+                    {
+                        Plugin.Log.LogError($"[BundleLoader] found duplicate asset {assetPath}");
+                        return;
+                    }
+                    assets.Add(assetPath, loadedAsset);
+                    Plugin.Log.LogInfo($"[BundleLoader] Loaded asset {loadedAsset.name}");
+                }
+            }
+            finally
+            {
+                bundle?.Unload(false);
+            }
+        }
+
         /// <summary>
         /// Get an asset from loaded assets.
         /// Return could be null if asset doesn't exist.
         /// </summary>
 
-        public static  TAsset GetLoadedAsset<TAsset>(string path) where TAsset : UnityEngine.Object
+        public static TAsset GetLoadedAsset<TAsset>(string path) where TAsset : UnityEngine.Object
         {
             assets.TryGetValue(path.ToLower(), out UnityEngine.Object asset);
             if (asset == null)
