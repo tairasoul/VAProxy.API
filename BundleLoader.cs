@@ -12,7 +12,7 @@ namespace VAP_API
     {
         public static bool hasLoadedAssets = false;
 
-        public static Dictionary<string, UnityEngine.Object> assets = new Dictionary<string, UnityEngine.Object>();
+        public static Dictionary<string, UnityEngine.Object> assets = [];
 
         public static event Action LoadComplete = completed;
 
@@ -71,7 +71,7 @@ namespace VAP_API
                 }
                 catch (Exception e)
                 {
-                    Plugin.Log.LogError($"[BundleLoader] Failed to load AssetBundle {array[i]}");
+                    Plugin.Log.LogError($"[BundleLoader] Failed to load AssetBundle {array[i]} with exception {e}");
                 }
             }
         }

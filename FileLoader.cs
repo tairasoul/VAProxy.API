@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-namespace VAP.BundleLoader
+namespace VAP_API
 {
     public class FileLoader
     {

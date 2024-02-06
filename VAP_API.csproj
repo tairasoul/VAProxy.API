@@ -7,8 +7,8 @@
     <ProjectGuid>{E9FD9CE3-926C-425B-87D1-684AC4CA7200}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VAP.BundleLoader</RootNamespace>
-    <AssemblyName>VAP.BundleLoader</AssemblyName>
+    <RootNamespace>VAP_API</RootNamespace>
+    <AssemblyName>VAP_API</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -35,7 +35,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <!-- Other properties -->
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>12.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BepInEx">
@@ -323,9 +323,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BundleLoader.cs" />
+    <Compile Include="Extensions\GameObject.cs" />
     <Compile Include="FileLoader.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIUtils\Components.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ui.textures.bundle" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
